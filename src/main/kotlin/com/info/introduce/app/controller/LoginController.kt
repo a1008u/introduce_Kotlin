@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 class LoginController {
 
     @GetMapping(path = arrayOf("loginForm"))
-    fun loginForm(): String { return "logingate/LoginForm" }
-
+    internal fun loginForm(): String {
+        return "logingate/LoginForm"
+    }
 
 }

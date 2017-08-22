@@ -7,9 +7,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
-//画面遷移用コントロaーラ
 @Controller
-//マッピングするURLの接頭辞
 @RequestMapping("MyProfile_confirm")
 @SessionAttributes(value = "MyProfileForm")
 class MyProfile_2_confirm_controller {

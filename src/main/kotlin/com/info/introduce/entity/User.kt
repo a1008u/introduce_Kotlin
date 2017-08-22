@@ -10,8 +10,7 @@ open class User {
     @Id
     @Column
     var userno :String = "Unkown"
-
-
+    
     // @Column
     // private var username:String = "Unkown"
 

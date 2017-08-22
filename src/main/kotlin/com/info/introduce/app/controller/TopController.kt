@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes
 
 
 @Controller
-//マッピングするURLの接頭辞
 @RequestMapping(value = "/Top", method = arrayOf(RequestMethod.GET))
 @SessionAttributes(value = "MyProfileBean")
 @ComponentScan("bean")

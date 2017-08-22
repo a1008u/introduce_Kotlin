@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder
 @EnableWebSecurity
 class SecurityConfig : WebSecurityConfigurerAdapter() {
 
-
     @Throws(Exception::class)
     override fun configure(web: WebSecurity?): Unit {
         web?.run({ ignoring().antMatchers("/webjars/**", "/css/**") })

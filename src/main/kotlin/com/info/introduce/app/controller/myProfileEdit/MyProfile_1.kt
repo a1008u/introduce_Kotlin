@@ -13,7 +13,6 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 
 @Controller
-//マッピングするURLの接頭辞
 @RequestMapping("MyProfile")
 @SessionAttributes(value = *arrayOf("MyProfileBean","MyProfileForm"))
 @ComponentScan("bean")

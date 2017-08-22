@@ -3,7 +3,6 @@ package com.info.introduce.app.service
 import com.info.introduce.entity.User
 import org.springframework.security.core.authority.AuthorityUtils
 
-
 class LoginUserDetails(user: User) : org.springframework.security.core.userdetails.User(
           user.userno
         , user.encodedPassword

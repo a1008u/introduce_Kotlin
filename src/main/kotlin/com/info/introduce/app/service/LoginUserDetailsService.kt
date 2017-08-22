@@ -16,8 +16,7 @@ class LoginUserDetailsService : UserDetailsService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(UserNo: String): UserDetails {
-        val user = userRepository?.run { findOne(UserNo) ?: throw UsernameNotFoundException("The requested user is not found.") }
-
+        val user = userRepository?.run { findOne(UserNo)?: throw UsernameNotFoundException("The requested user is not found.") }
         return LoginUserDetails(user as User)
     }
 }

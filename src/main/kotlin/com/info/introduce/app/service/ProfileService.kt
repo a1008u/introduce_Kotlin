@@ -36,8 +36,6 @@ class ProfileService {
         return ProfileBeanList as MutableList<ProfileBean>
     }
 
-
-
     // 【cRud】--------------------------------------------
     fun findOne(ProfileBean: ProfileBean): ProfileBean {
         val Profile = ProfileRepository?.run { findByUserno(ProfileBean.Userno)}

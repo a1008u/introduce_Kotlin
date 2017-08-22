@@ -29,5 +29,4 @@ class ProfileForm {
     var Dispatchlocation: String? = null
 
     var Freetext: String? = null
-
 }

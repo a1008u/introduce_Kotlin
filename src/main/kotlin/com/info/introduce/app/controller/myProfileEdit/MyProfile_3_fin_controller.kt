@@ -49,5 +49,4 @@ class MyProfile_3_fin_controller {
 
         return "redirect:/MyProfile_fin"
     }
-
 }
