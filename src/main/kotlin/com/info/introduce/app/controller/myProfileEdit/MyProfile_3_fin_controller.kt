@@ -18,10 +18,10 @@ import org.springframework.web.bind.support.SessionStatus
 class MyProfile_3_fin_controller {
 
     @Autowired
-    internal var ProfileService: ProfileService? = null
+    lateinit var ProfileService: ProfileService
 
     @Autowired
-    internal var ProfileBean: ProfileBean? = null
+    lateinit var ProfileBean: ProfileBean
 
     /**
      * 1.セッションを削除
@@ -37,12 +37,10 @@ class MyProfile_3_fin_controller {
     /**
      * 2.編集情報を保存する
      * @param Mav
-     * *
      * @param MyProfileForm @ModelAttribute("MyProfileForm")
      */
     @PostMapping
-    internal fun updateForm(Mav: Model,
-                            @ModelAttribute("MyProfileForm") MyProfileForm: ProfileForm): String {
+    internal fun updateForm(Mav: Model, @ModelAttribute("MyProfileForm") MyProfileForm: ProfileForm): String {
 
         BeanUtils.copyProperties(MyProfileForm, ProfileBean)
         ProfileService?.run { findOneAndSave(ProfileBean as ProfileBean) }

@@ -61,7 +61,6 @@ class MyProfile_2_confirm_controller {
     /**
      * 共通メソッド----------------------------------------------------------
      * Usernoの確認
-
      * @param MyProfileForm　
      */
     private fun Check_Userno(MyProfileForm: ProfileForm) {

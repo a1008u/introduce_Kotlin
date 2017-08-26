@@ -1,18 +1,14 @@
 package com.info.introduce.rest.restService
 
 import com.info.introduce.app.bean.ProfileBean
+import com.info.introduce.app.service.ProfileS
 import com.info.introduce.entity.Profile
 import com.info.introduce.rest.restBean.RestProfileBean
-import com.info.introduce.rest.restRepository.RestProfileRepository
 import org.springframework.beans.BeanUtils
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class RestProfileService{
-
-    @Autowired
-    lateinit var RestProfileRepository: RestProfileRepository
+class RestProfileService : ProfileS() {
 
     // 【cRud】--------------------------------------------
     fun findAll(): List<ProfileBean> = RestProfileRepository.findAllOrderByName().run {
@@ -37,10 +33,7 @@ class RestProfileService{
     // findOne→delete
     fun delete(RestProfileBean: RestProfileBean) = RestProfileRepository.deleteByUserno(RestProfileBean.Userno)
 
-    // extension
-    private fun RestProfileBean.copyProfile(): Profile {
-        val Profile = RestProfileRepository.findByUserno(Userno)
-        BeanUtils.copyProperties(this, Profile)
-        return Profile
-    }
+
 }
+
+

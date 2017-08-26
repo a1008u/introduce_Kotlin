@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes
 @RequestMapping(value = "/Top", method = arrayOf(RequestMethod.GET))
 @SessionAttributes(value = "MyProfileBean")
 @ComponentScan("bean")
-public class TopController {
+class TopController {
 
 	@Autowired
 	internal var profileService: ProfileService? = null

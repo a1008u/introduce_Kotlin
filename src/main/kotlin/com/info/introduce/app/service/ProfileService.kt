@@ -12,67 +12,36 @@ import javax.transaction.Transactional
 @Service
 @Transactional
 @ComponentScan("bean")
-class ProfileService {
-
-	@Autowired
-	val ProfileRepository :ProfileRepository? = null
+class ProfileService : ProfileS() {
 
     // 【cRud】--------------------------------------------
-    fun findAll(): List<ProfileBean> {
-
-        val ListProfile = ProfileRepository?.run{ findAllOrderByName()}
-
-        val ProfileBeanList = ListProfile?.run {
-            val ProfileBeanList = mutableListOf<ProfileBean>()
-
-            this.forEach { profile ->
-                val ProfileBean = ProfileBean()
-                BeanUtils.copyProperties(profile, ProfileBean)
-                ProfileBeanList.add(ProfileBean)
-            }
-            ProfileBeanList
-        }
-
-        return ProfileBeanList as MutableList<ProfileBean>
+    fun findAll(): List<ProfileBean> = ProfileRepository.findAllOrderByName().run {
+        val ProfileBeanList = mutableListOf<ProfileBean>()
+        forEach { profile -> ProfileBeanList.add(ProfileBean().also {BeanUtils.copyProperties(profile, it)}) }
+        ProfileBeanList
     }
 
     // 【cRud】--------------------------------------------
     fun findOne(ProfileBean: ProfileBean): ProfileBean {
-        val Profile = ProfileRepository?.run { findByUserno(ProfileBean.Userno)}
+        val Profile = ProfileRepository.run { findByUserno(ProfileBean.Userno)}
         BeanUtils.copyProperties(Profile, ProfileBean)
         return ProfileBean
     }
 
     // 【Crud】--------------------------------------------
-    fun create(ProfileBean: ProfileBean): Profile {
-        val Profile = copyProfile(ProfileBean)
-        return ProfileRepository?.run { save(Profile) } as Profile
-    }
+    fun create(ProfileBean: ProfileBean): Profile = ProfileRepository.run { save(ProfileBean.copyProfile()) }
 
     // 【crUd】--------------------------------------------
-    fun update(ProfileBean: ProfileBean): Profile {
-        val Profile = copyProfile(ProfileBean)
-        return ProfileRepository?.run { save(Profile) } as Profile
-    }
+    fun update(ProfileBean: ProfileBean): Profile = ProfileRepository.run { save(ProfileBean.copyProfile()) }
 
     fun findOneAndSave(ProfileBean: ProfileBean): Profile {
-        val Profile = ProfileRepository?.run { findByUserno(ProfileBean.Userno) }
+        val Profile = ProfileRepository.run { findByUserno(ProfileBean.Userno) }
         BeanUtils.copyProperties(ProfileBean, Profile)
-        return ProfileRepository?.run { save(Profile) } as Profile
+        return ProfileRepository.run { save(Profile) }
     }
 
     // 【cruD】--------------------------------------------
     // findOne→delete
-    fun delete(ProfileBean: ProfileBean) {
-        val Profile = ProfileRepository?.run { findByUserno(ProfileBean.Userno) }
-        ProfileRepository?.run { delete(Profile) }
-    }
-
-    // Common Pattern
-    private fun copyProfile(ProfileBean: ProfileBean): Profile {
-        val Profile = Profile()
-        BeanUtils.copyProperties(ProfileBean, Profile)
-        return Profile
-    }
-
+    fun delete(ProfileBean: ProfileBean) =
+            ProfileRepository.run { delete(ProfileRepository.run { findByUserno(ProfileBean.Userno) }) }
 }

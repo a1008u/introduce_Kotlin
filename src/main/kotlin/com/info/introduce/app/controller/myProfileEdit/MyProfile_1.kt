@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.*
 @ComponentScan("bean")
 class MyProfile_1 {
     @Autowired
-    internal var ProfileService: ProfileService? = null
+    lateinit var ProfileService: ProfileService
 
     @Autowired
-    internal var ProfileBean: ProfileBean? = null
+    lateinit var ProfileBean: ProfileBean
 
     /**
      * 1.リクエスト時に必ず呼び出す(Formの初期化)-------------------
@@ -62,11 +62,8 @@ class MyProfile_1 {
      * 2-2----------------------------------------------------
      * ProfileListからUserNoを取得し、Profile編集ページへ
      * (Profile編集ページは2-1と共通)
-
      * @param userno @RequestParam
-     * *
      * @param model
-     * *
      * @param MyProfileForm ＊セッションに格納しているFormを取得
      */
     @GetMapping(path = arrayOf("edit"))
@@ -74,8 +71,8 @@ class MyProfile_1 {
                               model: Model,
                               MyProfileForm: ProfileForm): String {
 
-        ProfileBean?.apply { Userno = userno }
-        ProfileBean = ProfileService?.run { findOne(ProfileBean as ProfileBean) }
+        ProfileBean.apply { Userno = userno }
+        ProfileBean = ProfileService.run { findOne(ProfileBean) }
         BeanUtils.copyProperties(ProfileBean, MyProfileForm)
         model.addAttribute("MyProfileForm", MyProfileForm)
 
